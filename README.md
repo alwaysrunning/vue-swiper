@@ -10,7 +10,7 @@ Vue.use(swiper);
 ```
  在模板中引入，异步获取 slide 的时候,需要在 swiper 上面添加 v-if 
 ``` js
-<swiper ref="swiper" v-if="list.length>0">
+<swiper ref="swiper" v-if="list.length>0" class="swiper">
 	<slide v-for="(item,index) in list" :key=index>
 		<img :src="item.img" />
 	</slide>
