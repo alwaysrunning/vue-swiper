@@ -4,7 +4,7 @@
             <slot/>
         </div>
         <slot name="showIndicator">
-            <div v-if="showIndicator" class="indicator">
+            <div v-if="showIndicator&&show" class="indicator">
                 <div v-for="(tag,$index) in slidesLength" v-bind:class="{ show_bgcolor: index-1==$index }" class="indicator_item"></div>
             </div>
         </slot>
@@ -13,7 +13,7 @@
 
 <script>
     export default {
-        name:"swiper",
+        name:"mk-swiper",
         data() {
             return {
                 slidesLength: 1,
@@ -29,7 +29,9 @@
                     distance: 0
                 },
                 index: 1,
-                slider:null
+                slider:null,
+                onlyOne:false,
+                show:true
             }
         },
         props: {
@@ -60,6 +62,10 @@
             this.$nextTick(() => {
                 //克隆dom
                 this.starDom()
+                if(this.onlyOne){
+                    this.show =false
+                    return
+                }
                 this.dom.transform = `translate3d(${this._width * -1}px, 0px, 0px)`
                 this.dom['-webkit-transform'] = `translate3d(${this._width * -1}px, 0px, 0px)`
                 this.dom['-ms-transform'] = `translate3d(${this._width * -1}px, 0px, 0px)`
@@ -70,22 +76,37 @@
 
         },
         methods: {
+            starDom() {
+                this.slider = document.querySelector('.' + this.className)
+                let SlideDom = this.slider.getElementsByClassName('slide')
+                this.slidesLength = SlideDom.length
+                if(this.slidesLength==1){
+                    this.onlyOne = true
+                    return
+                }
+                let cloneDom1 = SlideDom[0].cloneNode(true) //向最后append
+                let cloneDom2 = SlideDom[this.slidesLength - 1].cloneNode(true) //向最前append
+                this.slider.insertBefore(cloneDom2, SlideDom[0])
+                this.slider.appendChild(cloneDom1)
+                this._width = this.slider.offsetWidth
+                this.dom = this.slider.style
+            },
             s(x) {
-                if (this.sliding) {
+                if (this.sliding && !this.onlyOne) {
                     this.clearTimeOut()
                     this.t.sx = this.left()
                     this.t.start = x.touches[x.touches.length - 1].clientX
                 }
             },
             m(x) {
-                if (this.sliding && this.t.start != -1) {
+                if (this.sliding && this.t.start != -1 && !this.onlyOne) {
                     this.clearTimeOut()
                     this.t.distance = x.touches[x.touches.length - 1].clientX - this.t.start
                     this.setTransform(this.t.distance + this.t.sx)
                 }
             },
             e(x) {
-                if (this.sliding && this.t.start != -1) {
+                if (this.sliding && this.t.start != -1 && !this.onlyOne) {
                     this.clearTimeOut()
                     this.setTransform(this.t.distance + this.t.sx)
                     let x = this.left()
@@ -146,17 +167,6 @@
                         window.clearTimeout(this.timer1)
                     }
                 }, this.interval)
-            },
-            starDom() {
-                this.slider = document.querySelector('.' + this.className)
-                let SlideDom = this.slider.getElementsByClassName('slide')
-                this.slidesLength = SlideDom.length
-                let cloneDom1 = SlideDom[0].cloneNode(true) //向最后append
-                let cloneDom2 = SlideDom[this.slidesLength - 1].cloneNode(true) //向最前append
-                this.slider.insertBefore(cloneDom2, SlideDom[0])
-                this.slider.appendChild(cloneDom1)
-                this._width = this.slider.offsetWidth
-                this.dom = this.slider.style
             },
             clearTimeOut() {
                 this.auto = false

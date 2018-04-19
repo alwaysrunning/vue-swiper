@@ -1,17 +1,20 @@
 <template>
-    <div class="hello">
-        <swiper class="swiper" ref="swiper" v-if="list.length>0" @transitionend="getCurrrentSilder" :interval="5000" :autoPlay="true" :threshold="10" :showIndicator="true">
-            <slide v-for="(item,index) in list" :key=index>
+    <div>
+        <mk-swiper class="swiper" ref="swiper" v-if="list.length>0" @transitionend="getCurrrentSilder" :interval="5000" :autoPlay="true" :threshold="10" :showIndicator="true">
+            <mk-slide v-for="(item,index) in list" :key=index>
                 <img :src="item.img" />
-            </slide>
+            </mk-slide>
             <!--<div slot="showIndicator"></div>-->
-        </swiper>
+        </mk-swiper>
         <!-- 
         <div class="button" @click="slideToClick">跳到第三张</div> -->
     </div>
 </template>
 
 <script>
+    import Vue from 'vue'
+    import Swiper from '@/components'
+    Vue.use(Swiper);
     export default {
         data() {
             return {

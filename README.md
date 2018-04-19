@@ -5,16 +5,16 @@ Installation
 npm install mk-vue-swiper --save 
 ```  
 ``` js  
-import swiper from 'mk-vue-swiper'
-Vue.use(swiper); 
+import Swiper from 'mk-vue-swiper'
+Vue.use(Swiper); 
 ```
  在模板中引入，异步获取 slide 的时候,需要在 swiper 上面添加 v-if 
-``` js
-<swiper ref="swiper" v-if="list.length>0" class="swiper">
-	<slide v-for="(item,index) in list" :key=index>
+``` html
+<mk-swiper ref="swiper" v-if="list.length>0" class="swiper">
+	<mk-slide v-for="(item,index) in list" :key=index>
 		<img :src="item.img" />
-	</slide>
-</swiper>
+	</mk-slide>
+</mk-swiper>
 ```  
 
 在swiper上面暴露了一些配置选项: 
@@ -30,23 +30,23 @@ showIndicator:	是否显示 | default: true
 html  
   
 ``` html  
-<swiper class="swiper" ref="swiper" v-if="list.length>0" @transitionend="getCurrrentSilder" :interval="5000" :autoPlay="true" :threshold="10" :showIndicator="true">
-	<slide v-for="(item,index) in list" :key=index>
+<mk-swiper class="swiper" ref="swiper" v-if="list.length>0" @transitionend="getCurrrentSilder" :interval="5000" :autoPlay="true" :threshold="10" :showIndicator="true">
+	<mk-slide v-for="(item,index) in list" :key=index>
 		<img :src="item.imgSrc" />
-	</slide>
-</swiper>
+	</mk-slide>
+</mk-swiper>
 ```  
 
 js  
   
 ``` js  
-import swiper from 'mk-vue-swiper'
-Vue.use(swiper); 
+import Swiper from 'mk-vue-swiper'
+Vue.use(Swiper); 
 ```
   
 ### 如何设置轮播图的高度  
 ``` html
-<swiper class="swiper"></wc-swiper>
+<mk-swiper class="swiper"></mk-swiper>
 .swiper {
     height: 200px;
 }
@@ -56,6 +56,7 @@ Vue.use(swiper);
 ``` js
 //跳转到索引为 2 的 slide
 this.$refs.swiper.slideTo(2)
+
 //获取当前slide
 getCurrrentSilder(current)
 ``` 
@@ -63,16 +64,16 @@ getCurrrentSilder(current)
 ### Event  
 ``` html
 //在 slide 上面监听 click 事件
-<swiper>
-    <slide @click="fn"></wc-slide>
-</swiper>
+<mk-swiper>
+    <mk-slide @click="fn"></mk-slide>
+</mk-swiper>
 ``` 
 
 ### Slot  
 ``` html
-<swiper>
+<mk-swiper>
     <div slot="showIndicator"></div>
-</swiper>
+</mk-swiper>
 ``` 
 ### Contributor
 

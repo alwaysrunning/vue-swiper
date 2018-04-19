@@ -5,7 +5,7 @@
 </template>
 <script>
     export default {
-        name:"slide",
+        name:"mk-slide",
         methods: {
             clickSlide() {
                 this.$emit('click')
