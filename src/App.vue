@@ -1,6 +1,6 @@
 <template>
     <div>
-        <mk-swiper class="swiper" ref="swiper" v-if="list.length>0" @transitionend="getCurrrentSilder" :interval="5000" :autoPlay="true" :threshold="10" :showIndicator="true">
+        <mk-swiper class="swiper" ref="swiper" v-if="list.length>0" @scrollStatus="getScrollStatus" @transitionend="getCurrrentSilder" :interval="5000" :autoPlay="true" :threshold="10" :showIndicator="true">
             <mk-slide v-for="(item,index) in list" :key=index>
                 <img :src="item.img" />
             </mk-slide>
@@ -31,7 +31,11 @@
             },
 
             getCurrrentSilder (current){
-                console.log(current)
+                //console.log(current)
+            },
+
+            getScrollStatus(status){
+                console.log(status)
             }
         }
     }

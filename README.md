@@ -30,7 +30,7 @@ showIndicator:	是否显示 | default: true
 html  
   
 ``` html  
-<mk-swiper class="swiper" ref="swiper" v-if="list.length>0" @transitionend="getCurrrentSilder" :interval="5000" :autoPlay="true" :threshold="10" :showIndicator="true">
+<mk-swiper class="swiper" ref="swiper" v-if="list.length>0" @transitionend="getCurrrentSilder" @scrollStatus="getScrollStatus" :interval="5000" :autoPlay="true" :threshold="10" :showIndicator="true">
 	<mk-slide v-for="(item,index) in list" :key=index>
 		<img :src="item.imgSrc" />
 	</mk-slide>
@@ -56,18 +56,30 @@ Vue.use(Swiper);
 ``` js
 //跳转到索引为 2 的 slide
 this.$refs.swiper.slideTo(2)
-
-//获取当前slide
-getCurrrentSilder(current)
 ``` 
 
 ### Event  
 ``` html
 //在 slide 上面监听 click 事件
-<mk-swiper>
+<mk-swiper @scrollStatus="getScrollStatus" @scrollStatus="getScrollStatus">
     <mk-slide @click="fn"></mk-slide>
 </mk-swiper>
-``` 
+```
+``` js
+function getScrollStatus(status){
+	// status = 'start' 滑动开始
+	// status = 'moving' 滑动中
+	// status = 'start' 滑动结束
+}
+
+function getCurrrentSilder(slide){
+	// slide 获取当前slide
+}
+
+function fn(){
+	// 点击滑块触发
+}
+```  
 
 ### Slot  
 ``` html
@@ -77,4 +89,4 @@ getCurrrentSilder(current)
 ``` 
 ### Contributor
 
-yanghaitao 
+yanghaitao

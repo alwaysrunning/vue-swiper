@@ -93,6 +93,7 @@
             },
             s(x) {
                 if (this.sliding && !this.onlyOne) {
+                    this.$emit('scrollStatus', 'start')
                     this.clearTimeOut()
                     this.t.sx = this.left()
                     this.t.start = x.touches[x.touches.length - 1].clientX
@@ -100,6 +101,7 @@
             },
             m(x) {
                 if (this.sliding && this.t.start != -1 && !this.onlyOne) {
+                    this.$emit('scrollStatus', 'moving')
                     this.clearTimeOut()
                     this.t.distance = x.touches[x.touches.length - 1].clientX - this.t.start
                     this.setTransform(this.t.distance + this.t.sx)
@@ -107,6 +109,7 @@
             },
             e(x) {
                 if (this.sliding && this.t.start != -1 && !this.onlyOne) {
+                    this.$emit('scrollStatus', 'end')
                     this.clearTimeOut()
                     this.setTransform(this.t.distance + this.t.sx)
                     let x = this.left()
