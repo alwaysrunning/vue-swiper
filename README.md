@@ -65,11 +65,12 @@ this.$refs.swiper.slideTo(2)
     <mk-slide @click="fn"></mk-slide>
 </mk-swiper>
 ```
+
 ``` js
 function getScrollStatus(status){
 	// status = 'start' 滑动开始
 	// status = 'moving' 滑动中
-	// status = 'start' 滑动结束
+	// status = 'end' 滑动结束
 }
 
 function getCurrrentSilder(slide){

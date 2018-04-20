@@ -73,7 +73,7 @@
                     this.setTime()
                 }
             }, 50)
-
+            
         },
         methods: {
             starDom() {
