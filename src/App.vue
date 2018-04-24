@@ -12,6 +12,7 @@
 </template>
 
 <script>
+    
     import Vue from 'vue'
     import Swiper from '@/components'
     Vue.use(Swiper);

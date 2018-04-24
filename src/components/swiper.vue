@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import '../assets/sass/common.scss'
     export default {
         name:"mk-swiper",
         data() {
