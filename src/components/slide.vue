@@ -13,7 +13,7 @@
         }
     }
 </script>
-<style>
+<style scoped lang="scss">
 .slide {
     width: 100%;
     -ms-flex-negative: 0;

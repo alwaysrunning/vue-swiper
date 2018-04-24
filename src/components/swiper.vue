@@ -179,7 +179,7 @@
     }
 </script>
 
-<style>
+<style scoped lang="scss">
 .content {
     position: relative;
     z-index: 1;
