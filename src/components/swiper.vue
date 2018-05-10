@@ -98,6 +98,7 @@ import '../assets/sass/common.scss'
                     this.clearTimeOut()
                     this.t.sx = this.left()
                     this.t.start = x.touches[x.touches.length - 1].clientX
+                    this.t.startY = x.touches[x.touches.length - 1].clientY
                 }
             },
             m(x) {
@@ -105,6 +106,7 @@ import '../assets/sass/common.scss'
                     this.$emit('scrollStatus', 'moving')
                     this.clearTimeOut()
                     this.t.distance = x.touches[x.touches.length - 1].clientX - this.t.start
+                    this.t.distanceY = x.touches[x.touches.length - 1].clientY - this.t.startY
                     this.setTransform(this.t.distance + this.t.sx)
                 }
             },
@@ -128,9 +130,11 @@ import '../assets/sass/common.scss'
             left() {
                 return this.slider.getBoundingClientRect().left;
             },
-            /*阻止容器的上下滚动*/
+            /*当上下滚动超过20就会触发全屏滚动，小于10就阻止容器的上下滚动*/ 
             fn(e) {
-                e.preventDefault()
+                if( Math.abs(this.t.distanceY)<10 ){
+                    e.preventDefault()
+                }
             },
             slideTo(index) {
                 this.clearTimeOut()
