@@ -107,15 +107,16 @@ import '../assets/sass/common.scss'
                     this.clearTimeOut()
                     this.t.distance = x.touches[x.touches.length - 1].clientX - this.t.start
                     this.t.distanceY = x.touches[x.touches.length - 1].clientY - this.t.startY
-                    this.setTransform(this.t.distance + this.t.sx)
+                    //this.setTransform(this.t.distance + this.t.sx)
                 }
             },
             e(x) {
                 if (this.sliding && this.t.start != -1 && !this.onlyOne) {
                     this.$emit('scrollStatus', 'end')
                     this.clearTimeOut()
-                    this.setTransform(this.t.distance + this.t.sx)
-                    let x = this.left()
+                    //this.setTransform(this.t.distance + this.t.sx)
+                    //let x = this.left()
+                    let x = this.t.distance + this.t.sx
                     x += this.t.distance > 0 ? this._width * 0.5 - this.threshold : this._width * -0.5 + this.threshold
                     this.index = Math.round(x / this._width) * -1
                     this.wh('touch')
