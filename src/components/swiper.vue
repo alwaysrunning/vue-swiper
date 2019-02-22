@@ -89,7 +89,7 @@ import '../assets/sass/common.scss'
                 let cloneDom2 = SlideDom[this.slidesLength - 1].cloneNode(true) //向最前append
                 this.slider.insertBefore(cloneDom2, SlideDom[0])
                 this.slider.appendChild(cloneDom1)
-                this._width = this.slider.offsetWidth
+                this._width = (this.slider.getBoundingClientRect && this.slider.getBoundingClientRect().width) || this.slider.offsetWidth
                 this.dom = this.slider.style
             },
             s(x) {
